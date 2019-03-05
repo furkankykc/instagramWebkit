@@ -32,6 +32,9 @@ class fastProxy(models.Model):
         for ip in self.proxiesText.splitlines():
             Proxy.objects.create(ip=ip)
 
+def try_proxy(proxy):
+    proxies = {"http": "http://" + proxy, "https": "https://" + proxy}
+
 
 class Account(models.Model):
     username = models.CharField(max_length=20)

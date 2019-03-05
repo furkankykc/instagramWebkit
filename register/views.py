@@ -23,7 +23,7 @@ def dashboard(request):
     accounts = Account.objects.filter(client=user)
     print(accounts)
     context = {'user': user, 'accounts': accounts}
-    return render(request, 'Dashboard.html', context)
+    return render(request, 'index.html', context)
 
 
 @login_required
@@ -143,5 +143,5 @@ def post(request):
     print(accounts)
     context = {'user': user, 'accounts': accounts,
 
-               'forms': forms}
+               'form': forms}
     return render(request, 'postPage.html', context)

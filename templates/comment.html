@@ -1,50 +1,113 @@
 {% extends 'base.html' %}
 {% block  content %}
-    <div class="card">
-        <div class="card-header">
-            <strong>Comment</strong> Form
-        </div>
-        <div class="card-body card-block">
-            <form action="" method="post" class="form-horizontal">
-                {% csrf_token %}
-                <div class="row form-group">
-                    <div class="col col-md-3">
-{#                        <label for="hf-link" class=" form-control-label">Post Link</label>#}
-                    </div>
-                    <div class="col-12 col-md-9">
-                        <input type="text" id="hf-email" name="hf-link" placeholder="Enter Post Link..."
-                               class="form-control">
-                        <span class="help-block">Please enter post link</span>
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <div class="col col-md-3">
-                        <label for="hf-password" class=" form-control-label">Comment text</label>
-                    </div>
-                    <div class="col-12 col-md-9">
-                        <input type="text" id="hf-password" name="hf-text" placeholder="Enter text..."
-                               class="form-control">
-                        <span class="help-block">Please enter your comment</span>
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <div class="col col-md-3">
-                        <label for="hf-password" class=" form-control-label">Comment count</label>
-                    </div>
-                    <div class="col-12 col-md-9">
-                        <input type="text" id="hf-password" name="hf-count" placeholder="Enter count..."
-                               class="form-control">
-                        <span class="help-block">Please enter count</span>
-                    </div>
-                </div>
 
-        </div>
-        <div class="card-footer float-lg-right">
-            <button type="submit" class="btn btn-primary btn-sm">
-                <i class="fa fa-dot-circle-o"></i> Submit
-            </button>
+        <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>
+                        Yeni Yorum At
+                    </h2>
 
+                </div>
+                <div class="body">
+                    <form action="" method="post" class="form-horizontal">
+                        {% csrf_token %}
+                        <div class="row clearfix">
+                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                <label for="email_address_2">Yorum atılacak postun linkini giriniz</label>
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" id="email_address_2" name="hf-link" class="form-control"
+                                               placeholder="https://www.instagram.com/p/BdkuNbwARc7/">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="row clearfix">
+                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                <label for="email_address_2">Yorumunuzda ne yazsın </label>
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" id="email_address_2" name="hf-text" class="form-control"
+                                               placeholder="Yorum">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="row clearfix">
+                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                <label for="email_address_2">Kaç Adet Yorum Atılsın</label>
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" id="email_address_2" name="hf-count" class="form-control"
+                                               placeholder="20.000">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
+                                <button class="btn btn-primary m-t-15 waves-effect">Yorum At</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-    </form>
     </div>
+{##}
+{#    <div class="card">#}
+{#        <div class="card-header">#}
+{#            <strong>Comment</strong> Form#}
+{#        </div>#}
+{#        <div class="card-body card-block">#}
+{#            <form action="" method="post" class="form-horizontal">#}
+{#                {% csrf_token %}#}
+{#                <div class="row form-group">#}
+{#                    <div class="col col-md-3">#}
+{#                        <label for="hf-link" class=" form-control-label">Post Link</label>#}
+{#                    </div>#}
+{#                    <div class="col-12 col-md-9">#}
+{#                        <input type="text" id="hf-email" name="hf-link" placeholder="Enter Post Link..."#}
+{#                               class="form-control">#}
+{#                        <span class="help-block">Please enter post link</span>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="row form-group">#}
+{#                    <div class="col col-md-3">#}
+{#                        <label for="hf-password" class=" form-control-label">Comment text</label>#}
+{#                    </div>#}
+{#                    <div class="col-12 col-md-9">#}
+{#                        <input type="text" id="hf-password" name="hf-text" placeholder="Enter text..."#}
+{#                               class="form-control">#}
+{#                        <span class="help-block">Please enter your comment</span>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="row form-group">#}
+{#                    <div class="col col-md-3">#}
+{#                        <label for="hf-password" class=" form-control-label">Comment count</label>#}
+{#                    </div>#}
+{#                    <div class="col-12 col-md-9">#}
+{#                        <input type="text" id="hf-password" name="hf-count" placeholder="Enter count..."#}
+{#                               class="form-control">#}
+{#                        <span class="help-block">Please enter count</span>#}
+{#                    </div>#}
+{#                </div>#}
+{##}
+{#        </div>#}
+{#        <div class="card-footer float-lg-right">#}
+{#            <button type="submit" class="btn btn-primary btn-sm">#}
+{#                <i class="fa fa-dot-circle-o"></i> Submit#}
+{#            </button>#}
+{##}
+{#        </div>#}
+{#    </form>#}
+{#    </div>#}
 {% endblock %}

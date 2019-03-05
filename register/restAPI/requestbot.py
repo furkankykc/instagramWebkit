@@ -103,7 +103,9 @@ class CreateAccount:
                             quit()
                         elif (response["errors"]["ip"]):
                             print(self.username,':',self.email)
-                            print(response["errors"]["ip"]["message"])
+                            print('sssss='+response["errors"]["ip"]["message"])
+                            Proxy.delete(Proxy.objects.filter(ip=current_socket))
+
                         else:
                             pass
                         self.createaccount()
