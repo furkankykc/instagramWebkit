@@ -1,3 +1,7 @@
+import json
+import time
+
+import requests
 from django.contrib.auth.models import User
 from django.db import models
 from PIL import Image
@@ -30,10 +34,57 @@ class fastProxy(models.Model):
              update_fields=None):
         Proxy.objects.all().delete()
         for ip in self.proxiesText.splitlines():
-            Proxy.objects.create(ip=ip)
+            if try_proxy(ip):
+                Proxy.objects.create(ip=ip)
 
+        
 def try_proxy(proxy):
+    headers = {
+        'accept': "*/*",
+        'accept-encoding': "gzip, deflate, br",
+        'accept-language': "en-US,en;q=0.8",
+        'content-length': "241",
+        'content-type': 'application/x-www-form-urlencoded',
+        'origin': "https://www.instagram.com",
+        'referer': "https://www.instagram.com/",
+        'user-agent': "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.81 Safari/537.36",
+        'x-csrftoken': "95RtiLDyX9J6AcVz9jtUIySbwf75WhvG",
+        'x-instagram-ajax': "c7e210fa2eb7",
+        'x-requested-with': "XMLHttpRequest",
+        'Cache-Control': "no-cache",
+    }
+    payload = {
+        'email': 'testew32@mail.com',
+        'password': 'testet',
+        'username': 'Testuser',
+        'first_name': 'Testuser',
+        'client_id': 'W6mHTAAEAAHsVu2N0wGEChTQpTfn',
+        'seamless_login_enabled': '1',
+        'gdpr_s': '%5B0%2C2%2C0%2Cnull%5D',
+        'tos_version': 'eu',
+        'opt_into_one_tap': 'false'
+    }
     proxies = {"http": "http://" + proxy, "https": "https://" + proxy}
+
+    try:
+        request = requests.post("https://www.instagram.com/accounts/web_create_ajax/", data=payload, proxies=proxies,
+                                headers=headers)
+        response = json.loads(request.text)
+        try:
+            if (response["account_created"] is False):
+                if (response["errors"]["password"]):
+
+                    print(response["errors"]["password"]["message"])
+                    return False
+                elif (response["errors"]["ip"]):
+                    return False
+                else:
+                    return False
+        except:
+            return False
+    except:
+        return False
+    return True
 
 
 class Account(models.Model):
