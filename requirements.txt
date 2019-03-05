@@ -4,4 +4,4 @@ fake_useragent
 beautifulsoup4
 InstagramApi
 django-crispy-forms
-widget_tweaks
+django-widget_tweaks
