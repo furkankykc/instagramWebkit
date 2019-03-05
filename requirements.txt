@@ -1,0 +1,6 @@
+Pillow
+Django
+fake_useragent
+beautifulsoup4
+InstagramApi
+django-crispy-forms
