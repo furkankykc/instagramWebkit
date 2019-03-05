@@ -5,6 +5,7 @@ from .config import Config
 from .generateaccountinformation import genName, username, genEmail
 import json
 import re
+from .instaRegister import create
 
 from urllib.request import Request, urlopen
 from fake_useragent import UserAgent
@@ -39,6 +40,7 @@ class CreateAccount:
             'x-requested-with': "XMLHttpRequest",
             'Cache-Control': "no-cache",
         }
+        self.proxyproc()
         self.__collect_sockets()
 
     def proxyproc(self):
@@ -122,6 +124,9 @@ class CreateAccount:
 
 
 def runBot(user, count=1):
+    if count is None:
+        count = 1
     for i in range(int(count)):
         account = CreateAccount(user, genEmail(), username(), str(Config['password']), genName(), count)
         account.createaccount()
+    # create(username(), genName(), genEmail(),  str(Config['password']))

@@ -24,7 +24,7 @@ SECRET_KEY = 'pvh^ea66wy_5$!j-!5i7-#rgphxi1-htq35j+=8i_vnif)w#rl'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['furkankykc.me:8000','furkankykc.me','0.0.0.0:8000','wwww.furkankykc.me']
+ALLOWED_HOSTS = ['furkankykc.me:8000','furkankykc.me','0.0.0.0:8000','wwww.furkankykc.me','127.0.0.1']
 
 # Application definition
 

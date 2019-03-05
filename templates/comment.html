@@ -6,6 +6,7 @@
         </div>
         <div class="card-body card-block">
             <form action="" method="post" class="form-horizontal">
+                {% csrf_token %}
                 <div class="row form-group">
                     <div class="col col-md-3">
 {#                        <label for="hf-link" class=" form-control-label">Post Link</label>#}
@@ -36,7 +37,7 @@
                         <span class="help-block">Please enter count</span>
                     </div>
                 </div>
-            </form>
+
         </div>
         <div class="card-footer float-lg-right">
             <button type="submit" class="btn btn-primary btn-sm">
@@ -44,5 +45,6 @@
             </button>
 
         </div>
+    </form>
     </div>
 {% endblock %}

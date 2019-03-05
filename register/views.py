@@ -69,6 +69,7 @@ def createuser(request):
 def comment(request):
     if request.method == 'POST':
         if rmcredit(request.user.username, 1):
+            print('ttt')
             instaComment(request.user.username, request.POST['hf-link'], request.POST['hf-text'])
     user = Client.objects.get(user=User.objects.get(username=request.user.username))
     print(user)
@@ -109,12 +110,14 @@ def instaComment(user, media, text):
 
         for acc in Account.objects.filter(client=user):
             instaCli = InstagramClient(acc.username, acc.password)
-            instaCli.api.comment(media, text)
+            instaCli.api.comment(instaCli.get_media_id(media), text)
     except:
         pass
 
 def instaCreate(user, count):
     print('running bot for ', user, count)
+    if count is None:
+        count=1
     runBot(user, count)
 
 

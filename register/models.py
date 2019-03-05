@@ -22,29 +22,42 @@ class Client(models.Model):
     def __str__(self):
         return self.isim
 
+
+class fastProxy(models.Model):
+    proxiesText = models.TextField(null=True)
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        Proxy.objects.all().delete()
+        for ip in self.proxiesText.splitlines():
+            Proxy.objects.create(ip=ip)
+
+
 class Account(models.Model):
     username = models.CharField(max_length=20)
     password = models.CharField(max_length=20)
     email = models.CharField(max_length=20)
-    image = models.ImageField(null=True, upload_to='shared_photos')
+    # image = models.ImageField(null=True, upload_to='shared_photos')
     client = models.OneToOneField(Client, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.username
+
 
 class Announcement(models.Model):
     status = models.BooleanField(default=False)
     message = models.TextField(default="")
     valid_date = models.DateField(null=True)
 
-
     def __str__(self):
         return self.message
+
+
 class Post(models.Model):
-    image = models.ImageField(null=True,upload_to='shared_photos')
+    image = models.ImageField(null=True, upload_to='shared_photos')
     status = models.BooleanField(default=True)
     text = models.TextField(default='')
-    client = models.OneToOneField(Client,on_delete=models.CASCADE ,null=True)
+    client = models.OneToOneField(Client, on_delete=models.CASCADE, null=True)
     #
     # def save(self, **kwargs):
     #     img = Image.open(self.image.path)

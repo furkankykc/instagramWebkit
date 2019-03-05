@@ -141,6 +141,12 @@ class InstagramClient(object):
         self.api.getSelfUsernameInfo()
         # print(self.api.LastJson)
 
+    def get_media_id(self,url):
+        req = requests.get('https://api.instagram.com/oembed/?url={}'.format(url))
+        media_id = req.json()['media_id']
+        return media_id
+
+
     def upload(self, list):
         print(list)
         for l in list:

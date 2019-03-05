@@ -37,18 +37,6 @@ def banner():
 
 
 def create(username, name, email, password):
-    banner()
-    # parser = argparse.ArgumentParser()
-    # parser.add_argument('name', help='Full Name',default='test')
-    # parser.add_argument('username', help='Username',default='testasdasd')
-    # parser.add_argument('email', help='Email',default='test@gmail.com')
-    # parser.add_argument('password', help='Password')
-    # args = parser.parse_args()
-    # name = 'test'
-    # username = 'furkanTestdev2'
-    # email = 'dr4mk3131@hotmail.com'
-    # password = '8989323846q'
-
     getHeaders = {
         'User-Agent': 'Instagram 7.1.1 Android (21/5.0.2; 480dpi; 1080x1776; LGE/Google; Nexus 5; hammerhead; hammerhead; en_US)',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
