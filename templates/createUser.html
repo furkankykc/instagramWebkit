@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+
+{% block  content %}
+
+    <form action="" method="post" class="form-horizontal">
+        {% csrf_token %}
+        <div class="row form-group">
+            <div class="col col-md-12">
+                <div class="input-group">
+                    <input type="text" id="input2-group2" name="count" placeholder="Count"
+                           class="form-control">
+                    <div class="input-group-btn">
+                        <button class="btn btn-primary">Create</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+    <div class="table-responsive table--no-card m-b-30">
+        <table class="table table-borderless table-striped table-earning">
+            <thead>
+            <tr>
+                <th>USERNAME</th>
+                <th>PASSWORD</th>
+                <th>EMAIL</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for acc in accounts %}
+                <tr>
+                    <td>{{ acc.username }}</td>
+                    <td>{{ acc.password }}</td>
+                    <td>{{ acc.email }}</td>
+                </tr>
+            {% endfor %}
+
+
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

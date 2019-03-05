@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block  content %}
+    <div class="card">
+        <div class="card-header">
+            <strong>Comment</strong> Form
+        </div>
+        <div class="card-body card-block">
+            <form action="" method="post" class="form-horizontal">
+                <div class="row form-group">
+                    <div class="col col-md-3">
+{#                        <label for="hf-link" class=" form-control-label">Post Link</label>#}
+                    </div>
+                    <div class="col-12 col-md-9">
+                        <input type="text" id="hf-email" name="hf-link" placeholder="Enter Post Link..."
+                               class="form-control">
+                        <span class="help-block">Please enter post link</span>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3">
+                        <label for="hf-password" class=" form-control-label">Comment text</label>
+                    </div>
+                    <div class="col-12 col-md-9">
+                        <input type="text" id="hf-password" name="hf-text" placeholder="Enter text..."
+                               class="form-control">
+                        <span class="help-block">Please enter your comment</span>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3">
+                        <label for="hf-password" class=" form-control-label">Comment count</label>
+                    </div>
+                    <div class="col-12 col-md-9">
+                        <input type="text" id="hf-password" name="hf-count" placeholder="Enter count..."
+                               class="form-control">
+                        <span class="help-block">Please enter count</span>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer float-lg-right">
+            <button type="submit" class="btn btn-primary btn-sm">
+                <i class="fa fa-dot-circle-o"></i> Submit
+            </button>
+
+        </div>
+    </div>
+{% endblock %}
