@@ -7,12 +7,13 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        Yeni User Oluştur
+                        Beğeni At
                     </h2>
 
                 </div>
                 <div class="body">
                     <form action="" method="post" class="form-horizontal">
+                        {% csrf_token %}
                         <div class="row clearfix">
                             <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
                                 <label for="email_address_2">Beğeni Atacağınız Link</label>

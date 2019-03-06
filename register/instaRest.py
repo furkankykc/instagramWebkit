@@ -96,7 +96,7 @@ class InstagramClient(object):
     def followSomeOne(self, user_id):
         self.api.follow(user_id)
         if self.api.LastJson['status'] == 'ok':
-            print("Takip edilen hesap {}".format(user_id))
+            print("{} Takip edilen hesap {}".format(self.username.upper(), user_id))
             return True
         else:
             return False
@@ -141,11 +141,10 @@ class InstagramClient(object):
         self.api.getSelfUsernameInfo()
         # print(self.api.LastJson)
 
-    def get_media_id(self,url):
+    def get_media_id(self, url):
         req = requests.get('https://api.instagram.com/oembed/?url={}'.format(url))
         media_id = req.json()['media_id']
         return media_id
-
 
     def upload(self, list):
         print(list)
@@ -226,6 +225,11 @@ class InstagramClient(object):
         except Exception:
             print("username doesn't exist")
             return False
+
+    def get_user_id_url(self, url):
+        req = requests.get('https://api.instagram.com/oembed/?url={}'.format(url))
+        media_id = req.json()['user_id']
+        return media_id
 
     def register(self, username, password):
         return
