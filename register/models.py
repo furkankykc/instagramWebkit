@@ -38,6 +38,16 @@ class fastProxy(models.Model):
                 Proxy.objects.create(ip=ip)
 
 
+class fastInstagramAccount(models.Model):
+    accounts = models.TextField(null=True)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, null=True)
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        for acc in self.accounts.splitlines():
+            Account.objects.create(username=acc.split(':')[0], password=acc.split(':')[1], client=self.client)
+
+
 def try_proxy(proxy):
     headers = {
         'accept': "*/*",

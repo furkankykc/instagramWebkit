@@ -4,7 +4,7 @@
 # Twitter: behdadahmadi
 # https://github.com/behdadahmadi
 # https://logicalcoders.com
-
+import re
 
 import requests
 import hmac
@@ -26,17 +26,19 @@ def randomString(size):
     return ''.join(random.choice(chars) for _ in range(size))
 
 
-def banner():
-    dotname = "-" * 31
-    print(" ")
-    print(dotname.center(16, '-'))
-    print(".:: " + 'Instagram Account Maker' + " ::.".center(4))
-    print("by Behdad Ahmadi".center(30))
-    print("Twitter:behdadahmadi".center(30))
-    print(dotname.center(20, '-'))
+def __collect_sockets():
+    sockets = []
+    r = requests.get("https://www.sslproxies.org/")
+    matches = re.findall(r"<td>\d+.\d+.\d+.\d+</td><td>\d+</td>", r.text)
+    revised_list = [m1.replace("<td>", "") for m1 in matches]
+    for socket_str in revised_list:
+        sockets.append(socket_str[:-5].replace("</td>", ":"))
+
+    return sockets
 
 
-def create(username, name, email, password):
+def create(username, name, email, password, sockets):
+    current_socket = sockets.pop(0)
     getHeaders = {
         'User-Agent': 'Instagram 7.1.1 Android (21/5.0.2; 480dpi; 1080x1776; LGE/Google; Nexus 5; hammerhead; hammerhead; en_US)',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
@@ -61,9 +63,14 @@ def create(username, name, email, password):
                    'X-IG-Connection-Type': 'WIFI',
                    'X-IG-Capabilities': 'BQ=='
                    }
-    x = s.post('https://i.instagram.com/api/v1/accounts/create/', headers=postHeaders, data=payload)
+    proxies = {"http": "http://" + current_socket, "https": "https://" + current_socket}
+
+    x = s.post('https://i.instagram.com/api/v1/accounts/create/', headers=postHeaders, data=payload, proxies=proxies)
+
     result = json.loads(x.content)
+    print(result)
     if result['status'] != 'fail':
+        print(result)
         if result['account_created'] == True:
             print('Account has been created successfully')
         else:
@@ -71,9 +78,10 @@ def create(username, name, email, password):
             for i in result['errors']:
                 print(str(result['errors'][i][0]))
     else:
-        if result['spam'] == True:
-            print('Instagram blocks your IP due to spamming behaviour.')
+        # if result['spam'] == True:
+
+        print('Instagram blocks your IP due to spamming behaviour.')
 
 
 if __name__ == '__main__':
-    create('oddsFashionColins1', 'Colin\'s Styling ', 'fatihkykc@gmail.com', '8989323846q')
+    create('oddsFashionColins2', 'Colin\'s Styling ', 'mail23dsf@mail.com', '8989323846q', sockets=__collect_sockets())

@@ -29,8 +29,9 @@ def dashboard(request):
 @login_required
 def follow(request):
     if request.method == 'POST':
-        if rmcredit(request.user.username, 1):
-            instaFollow(request.user.username, request.POST['username'])
+        count = request.POST['count']
+        if rmcredit(request.user.username, count):
+            instaFollow(request.user.username, request.POST['username'],count)
     user = Client.objects.get(user=User.objects.get(username=request.user.username))
     print(user)
     accounts = Account.objects.filter(client=user)
@@ -42,12 +43,17 @@ def follow(request):
 def rmcredit(user, ammount):
     client = Client.objects.get(user=User.objects.get(username=user))
     print(client.credit)
-    cred = client.credit
-    if int(cred - ammount) >= 0:
-        client.credit = cred - ammount
-        print('this it')
-        return True
-    else:
+    cred = int(client.credit)
+    ammount = int(ammount)
+    try:
+        if int(cred - int(ammount)) >= 0:
+            client.credit = cred - ammount
+            print('this it')
+            client.save()
+            return True
+        else:
+            return False
+    except:
         return False
 
 
@@ -55,8 +61,9 @@ def rmcredit(user, ammount):
 def createuser(request):
     if request.method == 'POST':
         print('Count:', request.POST['count'])
-        if rmcredit(request.user.username, 1):
-            instaCreate(request.user.username, request.POST['count'])
+        count = request.POST['count']
+        if rmcredit(request.user.username, count):
+            instaCreate(request.user.username, count)
     user = Client.objects.get(user=User.objects.get(username=request.user.username))
     print(user)
     accounts = Account.objects.filter(client=user)
@@ -68,10 +75,11 @@ def createuser(request):
 @login_required
 def comment(request):
     if request.method == 'POST':
-        if rmcredit(request.user.username, 1):
+        count = request.POST['hf-count']
+        if rmcredit(request.user.username, count):
             print('ttt')
             instaComment(request.user.username, request.POST['hf-link'], request.POST['hf-text'],
-                         request.POST['hf-count'])
+                         count)
     user = Client.objects.get(user=User.objects.get(username=request.user.username))
     print(user)
     accounts = Account.objects.filter(client=user)
@@ -83,9 +91,10 @@ def comment(request):
 @login_required
 def like(request):
     if request.method == 'POST':
-        if rmcredit(request.user.username, 1):
-            print('ttt',request.POST['count'])
-            instaLike(request.user.username, request.POST['username'], request.POST['count'])
+        count = request.POST['count']
+        if rmcredit(request.user.username, count):
+            print('ttt', request.POST['count'])
+            instaLike(request.user.username, request.POST['username'], count)
     user = Client.objects.get(user=User.objects.get(username=request.user.username))
     print(user)
     accounts = Account.objects.filter(client=user)
@@ -132,12 +141,12 @@ def instaPost(user):
         pass
 
 
-def instaFollow(user, someone):
+def instaFollow(user, someone,count):
     print('insta login ', user)
 
     user = Client.objects.get(user=User.objects.get(username=user))
 
-    for acc in Account.objects.filter(client=user):
+    for acc in Account.objects.filter(client=user)[:count]:
         try:
             instaCli = InstagramClient(acc.username, acc.password)
             instaCli.followSomeOne(instaCli.get_user_id(someone))
@@ -146,15 +155,17 @@ def instaFollow(user, someone):
 
 
 def instaLike(user, targetMedia, count):
-        print('count',count)
-        user = Client.objects.get(user=User.objects.get(username=user))
+    print('count', count)
 
-        for acc in Account.objects.filter(client=user):
-            try:
-                instaCli = InstagramClient(acc.username, acc.password)
-                instaCli.api.like(instaCli.get_media_id(targetMedia))
-            except:
-                pass
+
+    user = Client.objects.get(user=User.objects.get(username=user))
+
+    for acc in Account.objects.filter(client=user)[:count]:
+        try:
+            instaCli = InstagramClient(acc.username, acc.password)
+            instaCli.api.like(instaCli.get_media_id(targetMedia))
+        except:
+            pass
 
 
 def instaComment(user, media, text, count):
