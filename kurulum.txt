@@ -1,0 +1,14 @@
+kurulum
+
+cd instagramRegisterBot
+apt install python3
+pip3 install django
+pip install -r requirements.txt
+python3 manage.py runserver 0.0.0.0:8000
+
+
+HÜSEYİN FURKAN KIYIKÇI
+Ziraat Bankası
+Şube: İNÖNÜ ÜNİVERSİTESİ/MALATYA ŞUBESİ
+Hesap Numarası: 1490-70921360-5001
+IBAN: TR 5300 0100 1490 7092 1360 5001
