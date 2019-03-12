@@ -205,3 +205,5 @@ def generatePassword():
 
 def genEmail():
     return ''.join(username(1) + '@mail.com')
+
+print(genName(),'',genEmail())

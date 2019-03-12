@@ -10,7 +10,7 @@ ASSET_DIR = os.path.join(BASE_DIR, 'Assets' )
 
 Config = {
     "bot_type" : 2, #change to 2 to use python requests
-    "password" : "generalpassword for each account created ",
+    "password" : "uzmanMedya",
     "use_custom_proxy" : True, #default is False change to True to use a file containing multiple proxies of yours.
     "use_local_ip_address" : False, #default is False chnage to True to user your computers ip directly.
     "amount_of_account": 10, #amount of account you want to create make sure it doesnt exceed 50 for better performance

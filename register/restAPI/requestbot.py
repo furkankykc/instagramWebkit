@@ -1,11 +1,11 @@
 import requests
 
 from register.models import Proxy, Account, Client
-from .config import Config
-from .generateaccountinformation import genName, username, genEmail
+from register.restAPI.config import Config
+from register.restAPI.generateaccountinformation import genName, username, genEmail
 import json
 import re
-from .instaRegister import create
+# from register.restAPI.instaRegister import create
 
 from urllib.request import Request, urlopen
 from fake_useragent import UserAgent

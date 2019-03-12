@@ -34,8 +34,13 @@ class fastProxy(models.Model):
              update_fields=None):
         Proxy.objects.all().delete()
         for ip in self.proxiesText.splitlines():
-            if try_proxy(ip):
-                Proxy.objects.create(ip=ip)
+            print(len(ip.split(':')))
+            if len(ip.split(':')) == 4:
+                auth = ip.split(':')[0]+':'+ip.split(':')[1]
+                ip = ip.split(':')[2]+':'+ip.split(':')[3]
+                ip = auth+'@'+ip
+            # if try_proxy(ip):
+            Proxy.objects.create(ip=ip)
 
 
 class fastInstagramAccount(models.Model):
